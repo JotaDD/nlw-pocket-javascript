@@ -13,7 +13,7 @@ export const goalsCompletedByWeekDay = db
             JSON_BUILD_OBJECT(
               'id', ${goalsCompletedInWeek.id},
               'title', ${goalsCompletedInWeek.title},
-              'completedAt', ${goalsCompletedInWeek.completedAt},
+              'completedAt', ${goalsCompletedInWeek.completedAt}
             )
           ) 
         `.as('completions'),

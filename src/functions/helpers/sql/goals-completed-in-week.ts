@@ -10,7 +10,7 @@ export const goalsCompletedInWeek = db.$with('goals_completed_in_week').as(
       title: goals.title,
       completedAt: goalCompletions.createdAt,
       completedAtDate: sql /*sql*/`
-        DATE(${goalCompletions.createdAt}),
+        DATE(${goalCompletions.createdAt})
       `.as('completedAtDate'),
     })
     .from(goalCompletions)
