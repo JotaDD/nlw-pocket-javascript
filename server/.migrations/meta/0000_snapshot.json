@@ -1,9 +1,52 @@
 {
-  "id": "ce07c682-8eec-4549-9725-930cb2ce55c0",
+  "id": "1a1dc9eb-7477-452a-abf4-87359b89f7d9",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
+    "public.goal_completions": {
+      "name": "goal_completions",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "goal_id": {
+          "name": "goal_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "goal_completions_goal_id_goals_id_fk": {
+          "name": "goal_completions_goal_id_goals_id_fk",
+          "tableFrom": "goal_completions",
+          "tableTo": "goals",
+          "columnsFrom": [
+            "goal_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "public.goals": {
       "name": "goals",
       "schema": "",
@@ -22,7 +65,7 @@
         },
         "desired_weekly_frequency": {
           "name": "desired_weekly_frequency",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true
         },

@@ -13,7 +13,7 @@ export async function getWeekSummary() {
           Number
         ),
       total: sql /*sql*/`(
-          SELECT sum(CAST(${goalsCreatedUpToWeek.desiredWeeklyFrequency} AS INTEGER)) 
+          SELECT sum(${goalsCreatedUpToWeek.desiredWeeklyFrequency}) 
           FROM ${goalsCreatedUpToWeek}
         )`.mapWith(Number),
       goalsPerDay: sql /*sql*/`
