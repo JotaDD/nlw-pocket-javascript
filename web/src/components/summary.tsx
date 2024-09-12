@@ -3,6 +3,8 @@ import { InOrbitIcon } from './in-orbit-icon'
 import { Button } from './ui/button'
 import { DialogTrigger } from './ui/dialog'
 import { Progress, ProgressIndicator } from './ui/progress-bar'
+import { Separator } from './ui/separator'
+import { OutlineButton } from './ui/outline-button'
 
 export function Summary() {
   return (
@@ -30,6 +32,27 @@ export function Summary() {
               Voce completou <span className="text-zinc-100">8</span> de{' '}
               <span className="text-zinc-100">15</span> metas nessa semana
             </span>
+          </div>
+
+          <Separator />
+
+          <div className="flex flex-wrap gap-3">
+            <OutlineButton>
+              <Plus className="size-4 text-zinc-600" />
+              Meditar
+            </OutlineButton>
+            <OutlineButton>
+              <Plus className="size-4 text-zinc-600" />
+              Fazer exercícios
+            </OutlineButton>
+            <OutlineButton>
+              <Plus className="size-4 text-zinc-600" />
+              Nadar
+            </OutlineButton>
+            <OutlineButton>
+              <Plus className="size-4 text-zinc-600" />
+              Nadar
+            </OutlineButton>
           </div>
         </Progress>
       </div>
