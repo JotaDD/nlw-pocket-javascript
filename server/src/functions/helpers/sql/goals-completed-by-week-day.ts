@@ -1,4 +1,4 @@
-import { sql } from 'drizzle-orm'
+import { desc, sql } from 'drizzle-orm'
 import { db } from '../../../db'
 import { goalsCompletedInWeek } from './goals-completed-in-week'
 
@@ -20,4 +20,5 @@ export const goalsCompletedByWeekDay = db
       })
       .from(goalsCompletedInWeek)
       .groupBy(goalsCompletedInWeek.completedAtDate)
+      .orderBy(desc(goalsCompletedInWeek.completedAtDate))
   )
