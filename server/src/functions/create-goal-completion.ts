@@ -1,7 +1,7 @@
-import { sql, eq } from 'drizzle-orm'
+import { eq, sql } from 'drizzle-orm'
 import { db } from '../db'
 import { goalCompletions, goals } from '../db/schema'
-import { goalCompletionCounts } from './helpers/sql/goal-completion-counts'
+import { getGoalCompletionCounts } from './helpers/sql/goal-completion-counts'
 
 interface CreateGoalCompletionRequest {
   goalId: string
@@ -10,6 +10,7 @@ interface CreateGoalCompletionRequest {
 export async function createGoalCompletion({
   goalId,
 }: CreateGoalCompletionRequest) {
+  const goalCompletionCounts = getGoalCompletionCounts(goalId)
   const result = await db
     .with(goalCompletionCounts)
     .select({
@@ -23,6 +24,10 @@ export async function createGoalCompletion({
     .where(eq(goals.id, goalId))
     .limit(1)
 
+  if (result.length === 0) {
+    throw new Error('Goal not found!')
+  }
+
   const { completionCount, desiredWeeklyFrequency } = result[0]
 
   if (completionCount >= desiredWeeklyFrequency) {
@@ -33,6 +38,7 @@ export async function createGoalCompletion({
     .insert(goalCompletions)
     .values({ goalId })
     .returning()
+
   const goalCompletion = insertResult[0]
 
   return {

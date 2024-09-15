@@ -1,9 +1,11 @@
 import { eq, sql } from 'drizzle-orm'
 import { db } from '../db'
-import { goalCompletionCounts } from './helpers/sql/goal-completion-counts'
+import { getGoalCompletionCounts } from './helpers/sql/goal-completion-counts'
 import { goalsCreatedUpToWeek } from './helpers/sql/goals-created-up-to-week'
 
 export async function getWeekPendingGoals() {
+  const goalCompletionCounts = getGoalCompletionCounts()
+
   const pendingGoals = await db
     .with(goalsCreatedUpToWeek, goalCompletionCounts)
     .select({
