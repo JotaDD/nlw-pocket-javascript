@@ -49,13 +49,11 @@ O back-end, desenvolvido com **Node.js** e **Fastify**, foi projetado para ser l
 - **Validação de Dados**: Realizada tanto no front-end quanto no back-end usando **Zod** para garantir a integridade dos dados.
 - **Banco de Dados**: PostgreSQL foi utilizado como banco de dados relacional, com queries otimizadas por meio de CTEs.
 
----
 
 ## Common Table Expressions (CTEs) no PostgreSQL
 
 As **CTEs** são subconsultas temporárias usadas dentro de queries maiores. Elas foram uma peça fundamental no gerenciamento de dados mais complexos no projeto, permitindo organizar melhor as consultas SQL e manter o código mais legível.
 
----
 
 ## Conclusão
 
