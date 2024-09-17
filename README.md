@@ -6,7 +6,7 @@ This project was created as part of the **Next Level Week** event by **RocketSea
 
 Este projeto foi criado como parte do evento **Next Level Week** da **RocketSeat**. A proposta foi desenvolver uma aplicação full-stack que facilita o gerenciamento de metas pessoais, utilizando tecnologias modernas no front-end e no back-end, com foco em desempenho e boas práticas de desenvolvimento.
 
-## Technologies Used | Tecnologias Empregadas
+## Technologies Used | Tecnologias Utilizadas
 
 ### Frontend
 
