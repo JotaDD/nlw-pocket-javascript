@@ -1,5 +1,9 @@
 import { X } from 'lucide-react'
 
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Controller, useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { createGoal } from '../http/create-goal'
 import { Button } from './ui/button'
 import {
   DialogClose,
@@ -10,26 +14,33 @@ import {
 import { Input } from './ui/input'
 import { Label } from './ui/label'
 import { RadioGroup } from './ui/radio-group'
-import { Controller, useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { WeekRadioOptions } from './week-radio-options'
+import { useQueryClient } from '@tanstack/react-query'
 
 const createGoalForm = z.object({
-  title: z.string().min(1, 'Informe a atividade que deseja realizar').max(7),
+  title: z.string().min(1, 'Informe a atividade que deseja realizar'),
   desiredWeeklyFrequency: z.coerce.number().min(1).max(7),
 })
 
 type CreateGoalForm = z.infer<typeof createGoalForm>
 
 export function CreateGoal() {
-  const { register, control, handleSubmit, formState } =
+  const queryClient = useQueryClient()
+
+  const { register, control, handleSubmit, formState, reset } =
     useForm<CreateGoalForm>({
       resolver: zodResolver(createGoalForm),
     })
 
-  function handleCreateGoal(data: CreateGoalForm) {
-    console.log(data)
+  async function handleCreateGoal(data: CreateGoalForm) {
+    await createGoal({
+      title: data.title,
+      desiredWeeklyFrequency: data.desiredWeeklyFrequency,
+    })
+
+    queryClient.invalidateQueries({ queryKey: ['summary'] })
+    queryClient.invalidateQueries({ queryKey: ['pending-goals'] })
+    reset()
   }
 
   return (

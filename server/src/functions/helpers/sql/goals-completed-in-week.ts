@@ -1,4 +1,4 @@
-import { and, eq, gte, lte, sql } from 'drizzle-orm'
+import { and, desc, eq, gte, lte, sql } from 'drizzle-orm'
 import { db } from '../../../db'
 import { goalCompletions, goals } from '../../../db/schema'
 import { firstDayOfWeek, lastDayOfWeek } from '../dayjs'
@@ -21,4 +21,5 @@ export const goalsCompletedInWeek = db.$with('goals_completed_in_week').as(
         lte(goalCompletions.createdAt, lastDayOfWeek)
       )
     )
+    .orderBy(desc(goalCompletions.createdAt))
 )
